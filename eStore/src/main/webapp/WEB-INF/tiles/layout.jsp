@@ -27,6 +27,7 @@
 
 <!-- Favicons - 브라우저 탭에 뜨는 아이콘 -->
 <link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
+<link href="<c:url value="/resources/fontAwesome/css/all.css"/>" rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
