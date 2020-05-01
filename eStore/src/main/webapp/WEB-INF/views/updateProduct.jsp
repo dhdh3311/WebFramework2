@@ -14,6 +14,8 @@
     <div class="form-group">
       <label for="name">Name</label>
       <sf:input path="name" id="name" class="form-control" />
+      <sf:errors path="name" cssStyle="color:#ff0000"/>
+      
     </div>
 
     <div class="form-group">
@@ -31,16 +33,19 @@
     <div class="form-group">
       <label for="price">Price</label>
       <sf:input path="price" id="price" class="form-control" />
+      <sf:errors path="price" cssStyle="color:#ff0000"/>
     </div>
 
     <div class="form-group">
       <label for="unitInStock">Unit In Stock</label>
       <sf:input path="unitInStock" id="unitInStock" class="form-control" />
+      <sf:errors path="unitInStock" cssStyle="color:#ff0000"/>
     </div>
 
     <div class="form-group">
       <label for="manufacturer">manufacturer</label>
       <sf:input path="manufacturer" id="manufacturer" class="form-control" />
+      <sf:errors path="manufacturer" cssStyle="color:#ff0000"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

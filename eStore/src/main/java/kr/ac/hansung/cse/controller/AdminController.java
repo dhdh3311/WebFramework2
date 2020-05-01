@@ -2,9 +2,13 @@ package kr.ac.hansung.cse.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,60 +34,80 @@ public class AdminController {
 
 		model.addAttribute("products", products);
 
-		return"productInventory";
+		return "productInventory";
 	}
-	
-	@RequestMapping(value="/productInventory/addProduct", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/productInventory/addProduct", method = RequestMethod.GET)
 	public String addProduct(Model model) {
-		
+
 		Product product = new Product();
-		
+
 		product.setCategory("컴퓨터");
-		
+
 		model.addAttribute("product", product);
-		
+
 		return "addProduct";
-		
+
 	}
-	
+
 	// web form data -> object(filled with form data)
-	@RequestMapping(value="/productInventory/addProduct", method=RequestMethod.POST)
-	public String addProductPost(Product product) { // controller -> service -> dao
-		
+	@RequestMapping(value = "/productInventory/addProduct", method = RequestMethod.POST)
+	public String addProductPost(@Valid Product product, BindingResult result) { // controller -> service -> dao
+
+		if (result.hasErrors()) {
+			System.out.println("=== Web Form data has some error ===");
+			List<ObjectError> errors = result.getAllErrors();
+
+			for (ObjectError error : errors) {
+				System.out.println(error.getDefaultMessage());
+			}
+			return "addProduct";
+		}
+
 		if (!productService.addProduct(product))
 			System.out.println("Adding Product cannot be done");
-		
+
 		return "redirect:/admin/productInventory";
-			
+
 	}
-	
-	@RequestMapping(value="/productInventory/deleteProduct/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/productInventory/deleteProduct/{id}", method = RequestMethod.GET)
 	public String deleteProduct(@PathVariable int id) {
-		
-		if(!productService.deleteProduct(id))
+
+		if (!productService.deleteProduct(id))
 			System.out.println("Deleting Product cannot be done");
-		
+
 		return "redirect:/admin/productInventory";
-		
+
 	}
-	
-	@RequestMapping(value="/productInventory/updateProduct/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/productInventory/updateProduct/{id}", method = RequestMethod.GET)
 	public String updateProduct(@PathVariable int id, Model model) {
-		
+
 		Product product = productService.getProductById(id);
 
 		model.addAttribute("product", product);
-		
+
 		return "updateProduct";
 	}
-	
-	@RequestMapping(value="/productInventory/updateProduct", method=RequestMethod.POST)
-	public String updateProductPost(Product product) { // controller -> service -> dao
+
+	@RequestMapping(value = "/productInventory/updateProduct", method = RequestMethod.POST)
+	public String updateProductPost(@Valid Product product, BindingResult result) { // controller -> service -> dao
+
+		if (result.hasErrors()) {
+			System.out.println("=== Web Form data has some error ===");
+			List<ObjectError> errors = result.getAllErrors();
+
+			for (ObjectError error : errors) {
+				System.out.println(error.getDefaultMessage());
+			}
+			return "updateProduct";
+		}
 
 		if (!productService.updateProduct(product))
 			System.out.println("Updating Product cannot be done");
-		
+
 		return "redirect:/admin/productInventory";
-			
+
 	}
 }
