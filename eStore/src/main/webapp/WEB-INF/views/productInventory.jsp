@@ -26,7 +26,10 @@
 						<td>${product.manufacturer}</td>
 						<td>${product.unitInStock}</td>
 						<td>${product.description}</td>
-						<td><a href="<c:url value="/admin/productInventory/deleteProduct/${product.id}"/>"><i class="fas fa-times-circle"></i></a></td>
+						<td><a href="<c:url value="/admin/productInventory/deleteProduct/${product.id}"/>"><i class="fas fa-times-circle"></i></a>
+						
+						<a href="<c:url value="/admin/productInventory/updateProduct/${product.id}"/>"><i class="fas fa-edit"></i></a>
+						</td>
 					</tr>
 				</c:forEach>
 				
