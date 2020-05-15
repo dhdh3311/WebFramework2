@@ -27,7 +27,7 @@ public class Person {
 	
 	private String lastName;
 	
-	@OneToOne(mappedBy="person", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@OneToOne(mappedBy="person", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private License license = new License();
 }
 
