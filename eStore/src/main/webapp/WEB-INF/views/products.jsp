@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="container-wrapper">
@@ -14,6 +15,7 @@
 					<th>Manufacturer</th>
 					<th>UnitInStock</th>
 					<th>Description</th>
+					<th> </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +27,8 @@
 						<td>${product.manufacturer}</td>
 						<td>${product.unitInStock}</td>
 						<td>${product.description}</td>
+						<td><a href="<c:url value="/viewProduct/${product.id}" />"><i class="fas fa-info-circle"></i></a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
