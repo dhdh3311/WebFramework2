@@ -21,31 +21,45 @@ public class OneToOne {
 		Person person1 = new Person();
 		person1.setFirstName("Alice");
 		person1.setLastName("Lee");
-		//person1.setLicense(license1);
 		
 		License license1 = new License();
 		license1.setLicenseNumber("123456");
 		license1.setIssueDate(new Date());
 		license1.setPerson(person1);
 		
+		person1.setLicense(license1);
+		
 		Session session = sessionFactory.openSession();
+		
+		Serializable lisId = 0;
 		
 		try {
 			Transaction tx = session.beginTransaction();
 
-			session.save(license1); // instead of sql statement
-			license1.setPerson(null);
+			lisId = session.save(person1); // instead of sql statement
 			
 			tx.commit();
+			
 		} catch (Exception exc) {
 			exc.printStackTrace();
 
 		} finally {
 			
 			session.close();
-			sessionFactory.close();
+			
 		}
 		
+//		Session session1 = sessionFactory.openSession();
+//		Transaction tx1 = session1.beginTransaction();
+//		
+//		Person aPerson = session1.get(Person.class, lisId);
+//	
+//		tx1.commit();
+//		session1.close();
+//			
+		
+		
+		sessionFactory.close();
 	}
 
 }
