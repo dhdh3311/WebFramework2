@@ -27,7 +27,12 @@
 
 <!-- Favicons - 브라우저 탭에 뜨는 아이콘 -->
 <link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
+
+<!--FontAwesome -->
 <link href="<c:url value="/resources/fontAwesome/css/all.css"/>" rel="stylesheet">
+
+<!-- AngularJS  -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 
 <style>
 .bd-placeholder-img {
