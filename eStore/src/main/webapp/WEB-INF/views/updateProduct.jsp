@@ -8,7 +8,7 @@
     <p class="lead">Fill the below information to add a product:</p>
 
     <sf:form action="${pageContext.request.contextPath}/admin/productInventory/updateProduct"
-        method="post" modelAttribute="product">
+        method="post" modelAttribute="product" enctype="multpart/form-data">
 
 	<sf:hidden path="id"/>
     <div class="form-group">
@@ -46,6 +46,11 @@
       <label for="manufacturer">manufacturer</label>
       <sf:input path="manufacturer" id="manufacturer" class="form-control" />
       <sf:errors path="manufacturer" cssStyle="color:#ff0000"/>
+    </div>
+    
+    <div class="form-group">
+      <label for="productImage">Upload Picture</label>
+      <sf:input path="productImage" id="manufacturer" type="file" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
