@@ -22,7 +22,7 @@
 						<i class="fas fa-trash"></i> Clear Cart
 				</a> 			
 
-				<br/>
+				<br/><br/>
 				
 				<table  class="table table-hover">
 					<tr>
@@ -38,8 +38,13 @@
 						<td>{{item.product.price}}</td>
 						<td>{{item.quantity}}</td>
 						<td>{{item.totalPrice}}</td>
-						<td><a  class="btn btn-danger" ng-click="removeFromCart(item.product.id)"> 
-							<i class="fas fa-minus"></i>remove </a></td>
+						<td>
+						<a  class="btn btn-danger btn-sm" ng-click="removeFromCart(item.product.id)"> remove </a>
+						<br /> <br />
+						<a  class="btn btn-warning btn-sm" ng-click="plusFromCart(item.product.id)"> + plus </a>
+						<a  class="btn btn-warning btn-sm" ng-click="minusFromCart(item.product.id)"> - minus </a>
+						
+						</td>
 					</tr>
 					
 					<tr>
@@ -52,6 +57,7 @@
 				</table>
 
 				<a class="btn btn-info" href="<c:url value="/products" />" class="btn btn-default">Continue	Shopping</a>
+				<br/><br/>
 			</div>
 		</section>
 

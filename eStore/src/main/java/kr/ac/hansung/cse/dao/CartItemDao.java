@@ -48,4 +48,38 @@ public class CartItemDao {
 
 		return (CartItem) query.getSingleResult();
 	}
+	
+	
+	// plus
+	public void plusCartItem(CartItem cartItem) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		int num = cartItem.getQuantity();
+		int max = cartItem.getProduct().getUnitInStock();
+		
+		if(num < max) {
+			cartItem.setQuantity(num+1);
+			
+			session.saveOrUpdate(cartItem);
+			session.flush();
+		}
+		
+	}
+	
+	// minus
+		public void minusCartItem(CartItem cartItem) {
+			Session session = sessionFactory.getCurrentSession();
+			
+			int num = cartItem.getQuantity();
+			
+			if(num == 1) {
+				removeCartItem(cartItem);
+			} else {
+				cartItem.setQuantity(num-1);
+				session.saveOrUpdate(cartItem);
+				session.flush();
+			}
+			
+		}
+	
 }

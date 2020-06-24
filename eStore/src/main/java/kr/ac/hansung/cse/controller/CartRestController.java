@@ -31,6 +31,9 @@ public class CartRestController {
 	@Autowired
 	private ProductService productService;
 	
+	
+	
+	
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
 	public ResponseEntity<Cart> getCartById(@PathVariable(value = "cartId") int cartId) {
 		
@@ -39,6 +42,10 @@ public class CartRestController {
 		
 	}
 
+	
+	
+	
+	
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> clearCart(@PathVariable(value = "cartId") int cartId) {
 		
@@ -48,6 +55,10 @@ public class CartRestController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		
 	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/cartItem/{productId}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> addItem(@PathVariable(value = "productId") int productId) {
@@ -88,6 +99,10 @@ public class CartRestController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
+	
+	
+	
+	
 	@RequestMapping(value = "/cartItem/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> removeItem(@PathVariable(value = "productId") int productId) {
 
@@ -100,4 +115,37 @@ public class CartRestController {
 
 	}
 
+	
+	
+	// plus
+	@RequestMapping(value = "/cartItem/plus/{productId}", method = RequestMethod.PUT)
+	public ResponseEntity<String> plusItem(@PathVariable(value = "productId") int productId) {
+
+		Cart cart = cartService.getCartById(1);  // temporary
+
+		CartItem cartItem = cartItemService.getCartItemByProductId(cart.getId(), productId);
+		cartItemService.plusCartItem(cartItem);
+
+		String str = "Success Plus!";
+		
+		return new ResponseEntity<String>(str, HttpStatus.NO_CONTENT);
+
+	}
+	
+	
+	// minus
+		@RequestMapping(value = "/cartItem/minus/{productId}", method = RequestMethod.PUT)
+		public ResponseEntity<String> minusItem(@PathVariable(value = "productId") int productId) {
+
+			Cart cart = cartService.getCartById(1);  // temporary
+
+			CartItem cartItem = cartItemService.getCartItemByProductId(cart.getId(), productId);
+			cartItemService.minusCartItem(cartItem);
+
+			String str = "Success Minus!";
+			
+			return new ResponseEntity<String>(str, HttpStatus.NO_CONTENT);
+
+		}
+	
 }

@@ -28,4 +28,14 @@ public class  CartItemService{
     public CartItem getCartItemByProductId (int cartId, int productId) {
         return cartItemDao.getCartItemByProductId(cartId, productId);
     }
+    
+    // plus
+    public void plusCartItem(CartItem cartItem){
+    	cartItemDao.plusCartItem(cartItem);
+    }
+    
+    // minus
+    public void minusCartItem(CartItem cartItem){
+    	cartItemDao.minusCartItem(cartItem);
+    }
 }

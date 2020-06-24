@@ -9,7 +9,7 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 	};
 
 	$scope.refreshCart = function() {
-		
+
 		$http.get('/eStore/api/cart/' + $scope.cartId).then(
 				function successCallback(response) {
 					$scope.cart = response.data;
@@ -17,7 +17,7 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 	};
 
 	$scope.clearCart = function() {
-				
+
 		$http({
 			method : 'DELETE',
 			url : '/eStore/api/cart/' + $scope.cartId
@@ -28,9 +28,9 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		});
 
 	};
-	
+
 	$scope.addToCart = function(productId) {
-				
+
 		$http.put('/eStore/api/cart/cartItem/' + productId).then(
 				function successCallback() {
 					alert("Product successfully added to the cart!");
@@ -41,7 +41,7 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 	};
 
 	$scope.removeFromCart = function(productId) {
-		
+
 		$http({
 			method : 'DELETE',
 			url : '/eStore/api/cart/cartItem/' + productId
@@ -52,6 +52,35 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		});
 	};
 
+	
+	// plus
+	$scope.plusFromCart = function(productId) {
+
+		$http({
+			method : 'PUT',
+			url : '/eStore/api/cart/cartItem/plus/' + productId
+		}).then(function successCallback() {
+			$scope.refreshCart();
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
+	};
+	
+	// minus
+	$scope.minusFromCart = function(productId) {
+
+		$http({
+			method : 'PUT',
+			url : '/eStore/api/cart/cartItem/minus/' + productId
+		}).then(function successCallback() {
+			$scope.refreshCart();
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
+	};
+	
+	
+
 	$scope.calGrandTotal = function() {
 		var grandTotal = 0;
 
@@ -61,5 +90,5 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 		return grandTotal;
 	};
-	
+
 });
