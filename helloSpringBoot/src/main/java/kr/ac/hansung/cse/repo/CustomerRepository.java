@@ -9,5 +9,3 @@ import kr.ac.hansung.cse.model.Customer;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	List<Customer> findByAge(int age);
 }
-
-// 머지 ㅠ
